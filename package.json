@@ -1,0 +1,56 @@
+{
+  "name": "nodejsstarterkit",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Node.js Starter Kit",
+  "author": "Timur Shemsedinov <timur.shemsedinov@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "server",
+    "api",
+    "rpc",
+    "rest",
+    "service",
+    "web",
+    "router",
+    "routing",
+    "cluster",
+    "cache",
+    "http",
+    "https",
+    "websocket",
+    "websockets",
+    "samdboxing",
+    "isolation",
+    "context",
+    "framework",
+    "scale",
+    "scaling",
+    "thread",
+    "worker"
+  ],
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run -s lint && node test/all.js",
+    "lint": "eslint .",
+    "install": "cert/generate.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HowProgrammingWorks/NodejsStarterKit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HowProgrammingWorks/NodejsStarterKit/issues"
+  },
+  "homepage": "https://github.com/HowProgrammingWorks/NodejsStarterKit",
+  "engines": {
+    "node": ">=12.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0"
+  },
+  "dependencies": {
+    "pg": "^8.1.1",
+    "ws": "^7.3.0"
+  }
+}
