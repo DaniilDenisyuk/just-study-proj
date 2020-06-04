@@ -1,63 +1,65 @@
-CREATE TABLE SystemUser (
-  Id        serial,
-  Login     varchar(64) NOT NULL,
-  Password  varchar(255) NOT NULL,
-  FullName  varchar(255)
+CREATE TABLE Book (
+  Id   serial,
+  Title varchar(255) NOT NULL,
+  Description text NOT NULL,
+  Published date NOT NULL,
+  Price float(2) NOT NULL CHECK(Price>0)
 );
+ALTER TABLE Book ADD CONSTRAINT pkBook PRIMARY KEY (Id);
 
-ALTER TABLE SystemUser ADD CONSTRAINT pkSystemUser PRIMARY KEY (Id);
-
-CREATE UNIQUE INDEX akSystemUserLogin ON SystemUser (Login);
-
-CREATE TABLE SystemGroup (
-  Id    serial,
-  Name  varchar(64) NOT NULL
+CREATE TABLE Author (
+  Id   serial,
+  AuthorName varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  URL varchar(255)
 );
+ALTER TABLE Author ADD CONSTRAINT pkAuthor PRIMARY KEY (Id);
+CREATE UNIQUE INDEX akAuthor ON Author (AuthorName);
 
-ALTER TABLE SystemGroup ADD CONSTRAINT pkSystemGroup PRIMARY KEY (Id);
-
-CREATE UNIQUE INDEX akSystemGroupName ON SystemGroup (Name);
-
-CREATE TABLE GroupUser (
-  GroupId  integer NOT NULL,
-  UserId   integer NOT NULL
+CREATE TABLE Publisher (
+  Id   serial,
+  PublisherName varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  Phone varchar(64) NOT NULL,
+  URL varchar(255)
 );
+ALTER TABLE Publisher ADD CONSTRAINT pkPublisher PRIMARY KEY (Id);
+CREATE UNIQUE INDEX akPublisher ON Publisher (PublisherName);
 
-ALTER TABLE GroupUser ADD CONSTRAINT pkGroupUser PRIMARY KEY (GroupId, UserId);
-ALTER TABLE GroupUser ADD CONSTRAINT fkGroupUserGroupId FOREIGN KEY (GroupId) REFERENCES SystemGroup (Id) ON DELETE CASCADE;
-ALTER TABLE GroupUser ADD CONSTRAINT fkGroupUserUserId FOREIGN KEY (UserId) REFERENCES SystemUser (Id) ON DELETE CASCADE;
-
-CREATE TABLE Session (
-  Id      serial,
-  UserId  integer NOT NULL,
-  Token   varchar(64) NOT NULL,
-  IP      varchar(45) NOT NULL,
-  Data    text
+CREATE TABLE Customer (
+  Id   serial,
+  FirstName varchar(64) NOT NULL,
+  SecondName varchar(64),
+  Address varchar(255),
+  Phone varchar(64)
 );
+ALTER TABLE Customer ADD CONSTRAINT pkCustomer PRIMARY KEY (Id);
+CREATE UNIQUE INDEX akCustomer ON Customer (Phone);
 
-ALTER TABLE Session ADD CONSTRAINT pkSession PRIMARY KEY (Id);
-
-CREATE UNIQUE INDEX akSession ON Session (Token);
-
-ALTER TABLE Session ADD CONSTRAINT fkSessionUserId FOREIGN KEY (UserId) REFERENCES SystemUser (Id) ON DELETE CASCADE;
-
-CREATE TABLE Country (
-  Id    serial,
-  Name  varchar(64) NOT NULL
+CREATE TABLE CartOrder (
+  Id   serial,
+  CreatedAt date NOT NULL,
+  ShippingAddress varchar(255)
 );
+ALTER TABLE CartOrder ADD CONSTRAINT pkCartOrder PRIMARY KEY (Id);
 
-ALTER TABLE Country ADD CONSTRAINT pkCountry PRIMARY KEY (Id);
-
-CREATE UNIQUE INDEX akCountry ON Country (Name);
-
-CREATE TABLE City (
-  Id         serial,
-  Name       varchar(64) NOT NULL,
-  CountryId  integer NOT NULL
+CREATE TABLE OrderBook (
+  OrderId integer NOT NULL,
+  BookId integer NOT NULL
 );
+ALTER TABLE OrderBook ADD CONSTRAINT pkOrderBook PRIMARY KEY (OrderId, BookId);
+ALTER TABLE OrderBook ADD CONSTRAINT fkOrderBookOrderId FOREIGN KEY (OrderId) REFERENCES CartOrder (Id) ON DELETE CASCADE;
+ALTER TABLE OrderBook ADD CONSTRAINT fkOrderBookBookId FOREIGN KEY (BookId) REFERENCES Book (Id) ON DELETE CASCADE;
 
-ALTER TABLE City ADD CONSTRAINT pkCity PRIMARY KEY (Id);
+CREATE TABLE Warehouse (
+  Id   serial
+);
+ALTER TABLE Warehouse ADD CONSTRAINT pkWarehouse PRIMARY KEY (Id);
 
-CREATE UNIQUE INDEX akCity ON City (Name);
-
-ALTER TABLE City ADD CONSTRAINT fkCityCountryId FOREIGN KEY (CountryId) REFERENCES Country (Id) ON DELETE CASCADE;
+CREATE TABLE WarehouseBook (
+  WarehouseID integer NOT NULL,
+  BookId integer NOT NULL
+);
+ALTER TABLE WarehouseBook ADD CONSTRAINT pkWarehouseBook PRIMARY KEY (WarehouseId, BookId);
+ALTER TABLE WarehouseBook ADD CONSTRAINT fkWarehouseBookWarehouseId FOREIGN KEY (WarehouseId) REFERENCES Warehouse (Id) ON DELETE CASCADE;
+ALTER TABLE WarehouseBook ADD CONSTRAINT fkWarehouseBookBookId FOREIGN KEY (BookId) REFERENCES Book (Id) ON DELETE CASCADE;
