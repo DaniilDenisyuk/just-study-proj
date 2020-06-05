@@ -1,8 +1,27 @@
+CREATE TABLE Author (
+  Id   serial,
+  Name varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  URL varchar(255)
+);
+ALTER TABLE Author ADD CONSTRAINT pkAuthor PRIMARY KEY (Id);
+CREATE UNIQUE INDEX akAuthor ON Author (Name);
+
+CREATE TABLE Publisher (
+  Id   serial,
+  Name varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  Phone varchar(64),
+  URL varchar(255)
+);
+ALTER TABLE Publisher ADD CONSTRAINT pkPublisher PRIMARY KEY (Id);
+CREATE UNIQUE INDEX akPublisher ON Publisher (Name);
+
 CREATE TABLE Book (
   Id   serial,
   Title varchar(255) NOT NULL,
-  Description text NOT NULL,
-  PublishDate date NOT NULL,
+  Description text ,
+  PublishDate varchar(255) NOT NULL,
   PublisherId integer NOT NULL,
   AuthorId integer NOT NULL,
   Price float(2) NOT NULL CHECK(Price>0)
@@ -10,25 +29,6 @@ CREATE TABLE Book (
 ALTER TABLE Book ADD CONSTRAINT pkBook PRIMARY KEY (Id);
 ALTER TABLE Book ADD CONSTRAINT fkBookPublisherId FOREIGN KEY (PublisherId) REFERENCES Publisher (Id) ON DELETE CASCADE;
 ALTER TABLE Book ADD CONSTRAINT fkBookAuthorId FOREIGN KEY (AuthorId) REFERENCES Author (Id) ON DELETE CASCADE;
-
-CREATE TABLE Author (
-  Id   serial,
-  AuthorName varchar(255) NOT NULL,
-  Address varchar(255) NOT NULL,
-  URL varchar(255)
-);
-ALTER TABLE Author ADD CONSTRAINT pkAuthor PRIMARY KEY (Id);
-CREATE UNIQUE INDEX akAuthor ON Author (AuthorName);
-
-CREATE TABLE Publisher (
-  Id   serial,
-  PublisherName varchar(255) NOT NULL,
-  Address varchar(255) NOT NULL,
-  Phone varchar(64) NOT NULL,
-  URL varchar(255)
-);
-ALTER TABLE Publisher ADD CONSTRAINT pkPublisher PRIMARY KEY (Id);
-CREATE UNIQUE INDEX akPublisher ON Publisher (PublisherName);
 
 CREATE TABLE Customer (
   Id   serial,
@@ -58,7 +58,8 @@ ALTER TABLE OrderBook ADD CONSTRAINT fkOrderBookOrderId FOREIGN KEY (OrderId) RE
 ALTER TABLE OrderBook ADD CONSTRAINT fkOrderBookBookId FOREIGN KEY (BookId) REFERENCES Book (Id) ON DELETE CASCADE;
 
 CREATE TABLE Warehouse (
-  Id   serial
+  Id   serial,
+  Code integer NOT NULL
 );
 ALTER TABLE Warehouse ADD CONSTRAINT pkWarehouse PRIMARY KEY (Id);
 

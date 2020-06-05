@@ -10,6 +10,11 @@ lib: main modules such as server, database api, load balancer etc.\
 static: files that emits client.\
 test: testing modules for application.\
 entry.js: Application`s entry point.\
+#### Load balancer
+In this project load balancer with min-connections algorithm. In case of searching \
+server with minimal connections in array complexity is O(N) to make searching complexity\
+better I used binary min-heap so now searching complexity is O(logN) with additional\
+complexity(O(logN)) to sort nodes after server gets new connection or connection ended; 
 #### Functionality
 Currently, server supports following functionality(not fully):
 - following the route /api/authors with GET request you can obtain list of authors;
@@ -19,6 +24,6 @@ Currently, server supports following functionality(not fully):
 - with GET request on /api/books/:id you will get book's info if book with this id exists;
 - with GET request on /api/publishers server respond with list of publishers.
 - with GET request on /api/publishers/:id server response will be publisher's info
-- with POST request with proper body on /api/books/add you can create a new book, author and publisher.
+- with POST request with proper body on /api/addBook you can create a new book, author and publisher.
 - with request on /health it will respond with request body so you can check if server\
  responding normally.
