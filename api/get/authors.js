@@ -1,5 +1,7 @@
-module.exports = async (pool, id = null, offset = 0, limit = 10) => {
+module.exports = async (pool, id, offset, limit) => {
   let data;
+  if (!offset) offset = 0;
+  if (!limit) limit = 10;
   if (id) {
     data = await pool.query('select book.title,' +
       ' book.published as published,' +
