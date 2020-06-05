@@ -22,4 +22,3 @@ Currently, server supports following functionality(not fully):
 - with POST request with proper body on /api/books/add you can create a new book, author and publisher.
 - with request on /health it will respond with request body so you can check if server\
  responding normally.
-
