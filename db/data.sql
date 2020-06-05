@@ -1,36 +1,56 @@
-INSERT INTO SystemUser (Login, Password) VALUES
-  ('admin', '$scrypt$N=32768,r=8,p=1,maxmem=67108864$XcD5Zfk+BVIGEyiksBjjy9LL42AFOOqlhEB650woECs$3CNOs25gOVV8AZMYQc6bFnrYdM+3xP996shxJEq5LxGt4gs1g9cocZmi/SYg/H16egY4j7qxTD/oygyEI80cgg'),
-  ('marcus', '$scrypt$N=32768,r=8,p=1,maxmem=67108864$aGKuH5D2zndi6zFu74/rEj5m3u5kRh5b+QXYfKrhAU8$257up1h/3R9CoxH2382zX0+kbxRPrd+GwzJIxYI+K+gBYCcLrA8Z6wv7lSwLElfbDTJRgUhQJFhMT1tpp5AJxw'),
-  ('user', '$scrypt$N=32768,r=8,p=1,maxmem=67108864$z5uf2xGdpgq5v2sZbgh36QoZG9CDmGmJUNJkrs1zs2w$3s3x22k4Td0jkup4WduFQGFVjrFKHjN1WV9k8/Bh3DKI58Wrlo/D4Js9j/DiskwI8rltDd8pF15JylivFu2T0g'),
-  ('iskandar', '$scrypt$N=32768,r=8,p=1,maxmem=67108864$EfcPTou2sTms7Esp4lsbJddN2RLAqqZUhP6sflwT7KU$FJiY0ad+qeNtZyFa0sXfQfeSIDS5HYS8wMk2/gtUlqy5vBddzVgKQYDqF5lKMNCm7IpOaYUZtRv7BQbxbVgkYg');
+INSERT INTO Author (Name, Address) VALUES
+  ('Frank Herbert', 'USA'),
+  ('Andrzej Sapkowski', 'Poland'),
+  ('George Martin', 'USA'),
+  ('John Tolkien', 'England'),
+  ('Paramahansa Yogananda', 'India'),
+  ('Satyananda Saraswati', 'India');
 
--- Examples login/password
--- admin/123456
--- marcus/marcus
--- user/nopassword
--- iskandar/zulqarnayn
+INSERT INTO Publisher (Name, Address) VALUES
+  ('Any1', 'Any'),
+  ('Any2', 'Any'),
+  ('Any3', 'Any');
 
-INSERT INTO SystemGroup (Name) VALUES
-  ('admins'),
-  ('users'),
-  ('guests');
+INSERT INTO Book (Title, PublishDate, AuthorId, PublisherId, Price) VALUES
+  ('Wither: The Last Wish',1993, 2, 1, 100.5),
+  ('Wither: Sword of Destiny',1992, 2, 1, 100.5),
+  ('Wither: Blood of Elves',1994, 2, 1, 100.5),
+  ('Wither: Time of Contempt',1995, 2, 1, 100.5),
+  ('Wither: Baptism of Fire',1996, 2, 1, 100.5),
+  ('Wither: The Tower of the Swallow',1997, 2, 1, 100.5),
+  ('Wither: The Lady of the Lake',1999, 2, 1, 100.5),
+  ('Wither: Season of Storms',2013, 2, 1, 150.0),
+  ('Dune',1965, 1, 2, 150.0),
+  ('Dune Messiah',1969, 1, 2, 100.0),
+  ('Children of Dune',1976, 1, 2, 150.0),
+  ('The Silmarillion',1977, 4, 3, 150.0),
+  ('The Hobbit or There and back again',1937, 4, 3, 150.0),
+  ('The Lord of the Rings: The Fellowship of the Ring',1954, 4, 3, 150.0),
+  ('The Lord of the Rings: The Two Towers',1954, 4, 3, 150.0),
+  ('The Lord of the Rings: The The Return of the King',1955, 4, 3, 150.0);
 
-INSERT INTO GroupUser (GroupId, UserId) VALUES
+INSERT INTO Warehouse (Code) VALUES
+  (123),
+  (456),
+  (789);
+
+INSERT INTO WarehouseBook (WarehouseId, BookId) VALUES
   (1, 1),
-  (2, 2),
-  (2, 3),
-  (2, 4);
+  (1, 2),
+  (1, 3),
+  (1, 4);
+  (1, 5),
+  (1, 6),
+  (1, 7),
+  (1, 8);
+  (2, 9),
+  (2, 10),
+  (2, 11),
+  (3, 12),
+  (3, 13),
+  (3, 14),
+  (3, 15);
+  (3, 16),
 
-INSERT INTO Country (Name) VALUES
-  ('Soviet Union'),
-  ('People''s Republic of China'),
-  ('Vietnam'),
-  ('Cuba');
 
-INSERT INTO City (Name, CountryId) VALUES
-  ('Beijing', 2),
-  ('Wuhan', 2),
-  ('Kiev', 1),
-  ('Havana', 4),
-  ('Hanoi', 3),
-  ('Kaliningrad', 1);
+
