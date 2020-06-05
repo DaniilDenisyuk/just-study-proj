@@ -3,6 +3,13 @@
     "strict": [
       "error",
       "never"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 160,
+        "ignoreUrls": true
+      }
     ]
   },
   "globals": {
