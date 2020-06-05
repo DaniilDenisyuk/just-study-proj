@@ -11,15 +11,15 @@ INSERT INTO Publisher (Name, Address) VALUES
   ('Any2', 'Any'),
   ('Any3', 'Any');
 
-INSERT INTO Book (Title, PublishDate, AuthorId, PublisherId, Price) VALUES
-  ('Wither: The Last Wish',1993, 2, 1, 100.5),
-  ('Wither: Sword of Destiny',1992, 2, 1, 100.5),
-  ('Wither: Blood of Elves',1994, 2, 1, 100.5),
-  ('Wither: Time of Contempt',1995, 2, 1, 100.5),
-  ('Wither: Baptism of Fire',1996, 2, 1, 100.5),
-  ('Wither: The Tower of the Swallow',1997, 2, 1, 100.5),
-  ('Wither: The Lady of the Lake',1999, 2, 1, 100.5),
-  ('Wither: Season of Storms',2013, 2, 1, 150.0),
+INSERT INTO Book (Title, published, AuthorId, PublisherId, Price) VALUES
+  ('Witcher: The Last Wish',1993, 2, 1, 100.5),
+  ('Witcher: Sword of Destiny',1992, 2, 1, 100.5),
+  ('Witcher: Blood of Elves',1994, 2, 1, 100.5),
+  ('Witcher: Time of Contempt',1995, 2, 1, 100.5),
+  ('Witcher: Baptism of Fire',1996, 2, 1, 100.5),
+  ('Witcher: The Tower of the Swallow',1997, 2, 1, 100.5),
+  ('Witcher: The Lady of the Lake',1999, 2, 1, 100.5),
+  ('Witcher: Season of Storms',2013, 2, 1, 150.0),
   ('Dune',1965, 1, 2, 150.0),
   ('Dune Messiah',1969, 1, 2, 100.0),
   ('Children of Dune',1976, 1, 2, 150.0),

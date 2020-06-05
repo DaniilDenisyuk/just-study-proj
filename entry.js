@@ -1,6 +1,5 @@
 'use strict';
 
-const { Worker } = require('worker_threads');
 const path = require('path');
 
 const Config = require('./lib/config.js');

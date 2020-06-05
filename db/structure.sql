@@ -21,7 +21,7 @@ CREATE TABLE Book (
   Id   serial,
   Title varchar(255) NOT NULL,
   Description text ,
-  PublishDate varchar(255) NOT NULL,
+  published varchar(255) NOT NULL,
   PublisherId integer NOT NULL,
   AuthorId integer NOT NULL,
   Price float(2) NOT NULL CHECK(Price>0)

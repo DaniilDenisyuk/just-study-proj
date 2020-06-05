@@ -31,9 +31,8 @@
   ],
   "main": "entry.js",
   "scripts": {
-    "test": "npm run -s lint && node test/all.js",
-    "lint": "eslint .",
-    "install": "cert/generate.sh"
+    "test": "npm run -s lint && node test/test.js",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
