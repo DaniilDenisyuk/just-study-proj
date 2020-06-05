@@ -2,10 +2,14 @@ CREATE TABLE Book (
   Id   serial,
   Title varchar(255) NOT NULL,
   Description text NOT NULL,
-  Published date NOT NULL,
+  PublishDate date NOT NULL,
+  PublisherId integer NOT NULL,
+  AuthorId integer NOT NULL,
   Price float(2) NOT NULL CHECK(Price>0)
 );
 ALTER TABLE Book ADD CONSTRAINT pkBook PRIMARY KEY (Id);
+ALTER TABLE Book ADD CONSTRAINT fkBookPublisherId FOREIGN KEY (PublisherId) REFERENCES Publisher (Id) ON DELETE CASCADE;
+ALTER TABLE Book ADD CONSTRAINT fkBookAuthorId FOREIGN KEY (AuthorId) REFERENCES Author (Id) ON DELETE CASCADE;
 
 CREATE TABLE Author (
   Id   serial,
@@ -38,10 +42,12 @@ CREATE UNIQUE INDEX akCustomer ON Customer (Phone);
 
 CREATE TABLE CartOrder (
   Id   serial,
+  CustomerId integer NOT NULL,
   CreatedAt date NOT NULL,
   ShippingAddress varchar(255)
 );
 ALTER TABLE CartOrder ADD CONSTRAINT pkCartOrder PRIMARY KEY (Id);
+ALTER TABLE CartOrder ADD CONSTRAINT fkCartOrderCustomerId FOREIGN KEY (CustomerId) REFERENCES Customer (Id) ON DELETE CASCADE;
 
 CREATE TABLE OrderBook (
   OrderId integer NOT NULL,
