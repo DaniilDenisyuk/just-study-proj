@@ -10,7 +10,6 @@ const Config = require('../lib/config');
   const server1 = new Server(1, cnf);
   const server2 = new Server(2, cnf);
   const server3 = new Server(3, cnf);
-  console.dir(cnf.sections);
 })();
 //console.dir(cnf.sections);
 
