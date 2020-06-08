@@ -3,7 +3,7 @@ module.exports = async (pool, id, offset, limit) => {
   if (!offset) offset = 0;
   if (!limit) limit = 10;
   if (id) {
-    data = await pool.query('select book.title,' +
+    data = await this.db.query('select book.title,' +
       ' book.published as published,' +
       ' book.price from author inner join book on author.id = book.authorid ' +
       'and author.id=$1 limit $2 offset $3', [id, limit, offset]).rows;

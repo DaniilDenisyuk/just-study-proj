@@ -1,15 +1,24 @@
 /* eslint-disable object-shorthand */
-const restApi = {
-  db: { query: () => { console.log('querying'); } },
-  routing: {
-    'post': function() { console.log(this); },
-    'get': db => () => { db.query(); },
-    'put': () => { this.db.query(); },
-    'delete': () => { this.db.query(); }
+'use strict';
+class api  {
+  constructor() {
+    this.routing = {
+      'post': () => { console.log(this); },
+      'get': () => { this.db.query(); },
+      'put': () => { this.db.query(); },
+      'delete': () => { this.db.query(); }
+    };
   }
-};
+}
+class server  {
+  constructor() {
+    this.db = { query: () => { console.log('querying'); } },
+    this.api = new api();
+  }
+}
 
-const server = {
-  api: restApi,
-};
-server.api.routing['get'](restApi.db)();
+const serve1 = new server();
+serve1.api.routing['post']();
+serve1.api.routing['post']();
+serve1.api.routing['put']();
+
