@@ -8,9 +8,9 @@ const Config = require('../lib/config');
 (async () => {
   const cnf = await new Config('../config');
   const lb = new LoadBalancer(cnf.sections.loadBalancer);
-  const server1 = new Server(1);
-  const server2 = new Server(2);
-  const server3 = new Server(3);
+  const server1 = new Server().init(8081, () => console.log('gut'));
+  const server2 = new Server().init(8082, () => console.log('gut'));
+  const server3 = new Server().init(8083, () => console.log('gut'));
   const serverUrl = new URL('/api/authors', 'http://127.0.0.1:8082');
   const serverUrl2 = new URL('/api/books', 'http://127.0.0.1:8081');
   const serverUrl3 = new URL('/api/publishers', 'http://127.0.0.1:8083');
