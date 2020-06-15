@@ -1,4 +1,5 @@
-module.exports = async (id, column, { sort, limit, offset }) => {
+module.exports = async function(id, column, query) {
+  if (!query) query = {};
   const sql = [];
   const values = [];
   let i = 1;
@@ -7,9 +8,9 @@ module.exports = async (id, column, { sort, limit, offset }) => {
     sql.push(`author.*, book.* FROM author INNER JOIN book ON author.id = book.authorid AND author.id=$${i++}`);
     values.push(id);
   } else sql.push('* FROM author');
-  if (sort) {
+  if (query.sort) {
     sql.push('ORDER BY');
-    const fields = sort.split(',');
+    const fields = query.sort.split(',');
     let count = fields.length;
     for (const field of fields) {
       const order = field.charAt(0) === '-' ? 'DESC' : 'ASK';
@@ -19,9 +20,9 @@ module.exports = async (id, column, { sort, limit, offset }) => {
     }
   }
   sql.push(`LIMIT ${i++}`);
-  values.push(limit ? `${limit}` : '10');
+  values.push(query.limit ? `${query.limit}` : '10');
   sql.push(`OFFSET ${i++}`);
-  values.push(offset ? `${offset}` : '0');
+  values.push(query.offset ? `${query.offset}` : '0');
   const data = await this.db.query(sql.join(' '), values);
   console.log(data.rows);
   return data.rows;

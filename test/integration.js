@@ -4,14 +4,16 @@ const LoadBalancer = require('../lib/loadBalancer');
 const http = require('http');
 const Server = require('../lib/server');
 const Config = require('../lib/config');
+const Database = require('../lib/database');
 
 (async () => {
   const cnf = await new Config('../config');
+  const db = new Database(cnf.sections.database);
   const lb = new LoadBalancer(cnf.sections.loadBalancer);
-  const server1 = new Server().init(8081, () => console.log('gut'));
-  const server2 = new Server().init(8082, () => console.log('gut'));
-  const server3 = new Server().init(8083, () => console.log('gut'));
-  const serverUrl = new URL('/api/authors', 'http://127.0.0.1:8082');
+  const server1 = new Server(db).init(8081, () => console.log('server launched'));
+  const server2 = new Server(db).init(8082, () => console.log('server launched'));
+  const server3 = new Server(db).init(8083, () => console.log('server launched'));
+  const serverUrl = new URL('/api/authors/2?sort=-published', 'http://127.0.0.1:8082');
   const serverUrl2 = new URL('/api/books', 'http://127.0.0.1:8081');
   const serverUrl3 = new URL('/api/publishers', 'http://127.0.0.1:8083');
   http.get(serverUrl, resp => {

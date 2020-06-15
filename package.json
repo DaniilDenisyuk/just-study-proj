@@ -31,7 +31,7 @@
   ],
   "main": "entry.js",
   "scripts": {
-    "test": "npm run -s lint && node test/test.js",
+    "test": "npm run -s lint && node test/integration.js",
     "lint": "eslint ."
   },
   "repository": {

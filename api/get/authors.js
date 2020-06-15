@@ -1,29 +1,18 @@
-module.exports = async (id, column, query) => {
-  if (!query) query = {};
-  const sql = [];
-  const values = [];
-  let i = 1;
-  sql.push('SELECT');
+const defaultTable = 'author';
+const additionalTable = 'book';
+const defaultTableFields = ['*'];
+const defaultAddTableFields = ['title', 'published'];
+
+module.exports = async function(id, column, filters) {
   if (id) {
-    sql.push(`author.*, book.* FROM author INNER JOIN book ON author.id = book.authorid AND author.id=$${i++}`);
-    values.push(id);
-  } else sql.push('* FROM author');
-  if (query.sort) {
-    sql.push('ORDER BY');
-    const fields = query.sort.split(',');
-    let count = fields.length;
-    for (const field of fields) {
-      const order = field.charAt(0) === '-' ? 'DESC' : 'ASK';
-      sql.push(`${field.substring(1)} ${order}`);
-      count--;
-      if (count > 0) sql.push(',');
+    const instructions = {};
+    instructions[defaultTable] = { fields: defaultTableFields, conditions: { id } };
+    if (column) {
+      instructions[defaultTable].fields = [column];
     }
+    instructions[additionalTable] = { fields: defaultAddTableFields };
+    return this.db.selectInnerJoin(instructions, filters);
+  } else {
+    return this.db.select(defaultTable, filters);
   }
-  sql.push(`LIMIT ${i++}`);
-  values.push(query.limit ? `${query.limit}` : '10');
-  sql.push(`OFFSET ${i++}`);
-  values.push(query.offset ? `${query.offset}` : '0');
-  const data = await this.db.query(sql.join(' '), values);
-  console.log(data.rows);
-  return data.rows;
 };

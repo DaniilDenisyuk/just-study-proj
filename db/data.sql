@@ -7,9 +7,9 @@ INSERT INTO Author (Name, Address) VALUES
   ('Satyananda Saraswati', 'India');
 
 INSERT INTO Publisher (Name, Address) VALUES
-  ('Any1', 'Any'),
-  ('Any2', 'Any'),
-  ('Any3', 'Any');
+  ('Name1', 'Address1'),
+  ('Name2', 'Address2'),
+  ('Name3', 'Address3');
 
 INSERT INTO Book (Title, published, AuthorId, PublisherId, Price) VALUES
   ('Witcher: The Last Wish',1993, 2, 1, 100.5),
