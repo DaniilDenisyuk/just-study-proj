@@ -1,18 +1,13 @@
-const defaultTable = 'author';
-const additionalTable = 'book';
+const defaultTable = 'book';
 const defaultTableFields = ['*'];
-const defaultAddTableFields = ['title', 'published'];
 
 module.exports = async function(id, column, filters) {
   if (id) {
-    const instructions = {};
-    instructions[defaultTable] = { fields: defaultTableFields, conditions: { id } };
+    let fields = defaultTableFields;
     if (column) {
-      instructions[defaultTable].fields = [column];
+      fields = [column];
     }
-    instructions[additionalTable] = { fields: defaultAddTableFields };
-    return this.db.selectInnerJoin(instructions, filters);
-  } else {
-    return this.db.select(defaultTable, filters);
+    return this.db.select(defaultTable, filters, fields, { id });
   }
+  return this.db.select(defaultTable, filters);
 };
